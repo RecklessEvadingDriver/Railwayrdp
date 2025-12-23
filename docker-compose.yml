@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  vps-server:
+    build: .
+    container_name: railway-vps
+    ports:
+      - "2222:22"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD:-railway123}
+    restart: unless-stopped
+    privileged: true
+    shm_size: '4gb'
+    deploy:
+      resources:
+        limits:
+          cpus: '32'
+          memory: 32G
+        reservations:
+          cpus: '4'
+          memory: 4G
